@@ -1,0 +1,22 @@
+<div class="app-movie" (mouseenter)="viewNumbers()" (mouseleave)="maskNumbers()">
+    <div id="header">
+        <button class="btn" id="deja_vu">✅<div class="tooltiptext">Ajouté à ma liste de films déjà vu</div></button>
+        <button class="btn" id="to_not_see">❌<div class="tooltiptext">Ajouté à ma liste de films que je ne regarderais jamais</div></button>
+    </div>
+    <div id="card">
+        <img src="{{ imgUrl }}" alt="{{ title }}" id="front">
+        <div id="back">
+            <div><b>De</b> {{ director }}</div>
+            <div><b>Par</b> {{ producer }}</div>
+            <div><b>Genre</b> {{ category }}</div>
+            <div><b>Avec</b> {{ actor }}</div>
+            <div><b>Synopsis</b> : {{ synopsis }}</div>
+            <div><b>Public</b> : {{ ageMinimum }}</div>
+        </div>
+    </div>
+    <div id="info">
+        <h1>{{ title }}</h1>
+        <p>{{ description }}</p>
+    </div>
+</div>
+

@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "cinema": {
+    "cinema_app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -24,17 +24,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "security": {
-              "allowedHosts": []
-            },
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "styles": ["src/material-theme.scss", "src/styles.css"]
           },
           "configurations": {
             "production": {
@@ -64,10 +54,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "cinema:build:production"
+              "buildTarget": "cinema_app:build:production"
             },
             "development": {
-              "buildTarget": "cinema:build:development"
+              "buildTarget": "cinema_app:build:development"
             }
           },
           "defaultConfiguration": "development"
