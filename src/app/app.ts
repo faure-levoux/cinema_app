@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FirstPage } from './first-page/first-page';
 // import { RouterOutlet } from '@angular/router';
 

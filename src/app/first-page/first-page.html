@@ -1,1 +1,8 @@
-<app-movie></app-movie>
+Liste films Déjà vu
+liste liste qu'on nne veut pas voir
+<div id="app-first-page">
+    @for (movie of movies; track movie.title) {
+        <app-movie [movie]="movie"/>
+
+    }
+</div>
