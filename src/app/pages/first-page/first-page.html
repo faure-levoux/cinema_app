@@ -1,9 +1,7 @@
 <app-search-bar [(search)]="searchText"></app-search-bar>
 
-    <div>Search Text {{ searchText }}</div>
+    <div>Film recherché {{ searchText }}</div>
 
-    <button>Note publique > 4/5</button>
-    <button>Tri par note publique</button>
     <label for="sort">Tri par</label>
     <select name="sort" id="sort" #sort (change)="sortingMoviesFromChoice(sort.value)">
         <option value="sortByNotePub" selected>Note Publique</option>

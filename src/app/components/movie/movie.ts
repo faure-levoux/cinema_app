@@ -3,6 +3,7 @@ import { Movie } from '../../models/movie';
 import { AsyncPipe, DatePipe, NgFor, NgForOf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-movie',
@@ -13,6 +14,7 @@ import { NgForm } from '@angular/forms';
 export class MovieComponent {
   @Input() movie!: Movie;
   count = 0;
+  constructor(private http: HttpClient) {}
 
   
   to_not_see(): void {
@@ -28,6 +30,7 @@ export class MovieComponent {
       this.movie.Film_Vue = false;
     } else {
       this.movie.Film_Vue = true;
+      this.http.get<string>("http://localhost:5000/update_seen_movie?id=" + this.movie.Film_IdAllocine).subscribe();
     }
   }
 

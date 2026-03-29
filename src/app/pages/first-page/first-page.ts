@@ -61,7 +61,7 @@ export class FirstPage implements OnInit {
   movies$!: Observable<Movie[]>;
 
   ngOnInit(): void {
-    this.movies$ = this.http.get<string>('http://localhost:5000/list_movies_from_to?from=0&to=250').pipe(
+    this.movies$ = this.http.get<string>('http://localhost:5000/list_movies_from_to?from=10000&to=10250').pipe(
       map(v => {
         const movies: Movie[] = [];
         for(let i = 0; i < v.length; i++) {

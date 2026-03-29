@@ -1,2 +1,8 @@
-<p>movie-info-page works!</p>
-{{ urlIdMovie }}
+<div id="app-movie-info-page">
+    <img src="http://localhost:5000/poster?id={{ urlIdMovie }}" alt="{{ urlIdMovie }}" id="front">
+    dsd
+    sdf
+    <p>sdf</p>
+    {{ infosMovie$ | async}}
+    <!-- @for (info in infosMovie$, track info) -->
+</div>

@@ -15,7 +15,7 @@
         </div>
     </div>
     <div id="info">
-        <h1 id="titleMovie"><a routerLink="film/{{ movie.Film_Id }}">{{ movie.Film_Titre }}</a></h1>
+        <h1 id="titleMovie"><a routerLink="film/{{ movie.Film_IdAllocine }}">{{ movie.Film_Titre }}</a></h1>
     </div>
     <div id="notes">
         <div>Date de sortie : {{ movie.Film_DateDeSortie | date: 'd MMMM yyyy, à HH:mm' }}</div>

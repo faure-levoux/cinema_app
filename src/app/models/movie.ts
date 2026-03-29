@@ -1,5 +1,3 @@
-import { MovieInterface } from "../interfaces/movies"
-
 export class Movie {
     Film_Id: number;
     Film_IdAllocine: number;
@@ -37,66 +35,5 @@ export class Movie {
         this.Film_ANePasVoir = false;
     }
 
-    
-    // key: number;
-    // title: string;
-    // // imgUrl: string;
-    // // director: string;
-    // // producer: string;
-    // // category: string;
-    // // actor: string;
-    // // synopsis: string;
-    // // ageMinimum: string;
-    // nb_notes_public: number;
-    // avg_note_public: number;
-    // nb_notes_pro: number;
-    // avg_note_pro: number;
-    // releaseDate: Date;
-    // // url: string;
-    // deja_vu: boolean;
-    
-    // constructor(key: number, title: string, nb_notes_public: number, avg_note_public: number, nb_notes_pro: number, avg_note_pro: number, releaseDate: Date, deja_vu: boolean = false)  {
-    //     this.key = key;
-    //     this.title = title;
-    //     // this.imgUrl = imgUrl;
-    //     // this.director = director;
-    //     // this.producer = producer;
-    //     // this.category = category;
-    //     // this.actor = actor;
-    //     // this.synopsis = synopsis;
-    //     // this.ageMinimum = ageMinimum;
-    //     this.nb_notes_public = nb_notes_public;
-    //     this.avg_note_public = avg_note_public;
-    //     this.nb_notes_pro = nb_notes_pro;
-    //     this.avg_note_pro = avg_note_pro;
-    //     this.releaseDate = releaseDate;
-    //     this.deja_vu = deja_vu;
-    // }
-    // constructor(title: string, imgUrl: string, director: string, producer: string, category: string, actor: string, synopsis: string, ageMinimum: string, nb_notes_public: number, avg_note_public: number, nb_notes_pro: number, avg_note_pro: number, releaseDate: Date, url: string, deja_vu: boolean = false)  {
-    //     this.title = title;
-    //     this.imgUrl = imgUrl;
-    //     this.director = director;
-    //     this.producer = producer;
-    //     this.category = category;
-    //     this.actor = actor;
-    //     this.synopsis = synopsis;
-    //     this.ageMinimum = ageMinimum;
-    //     this.nb_notes_public = nb_notes_public;
-    //     this.avg_note_public = avg_note_public;
-    //     this.nb_notes_pro = nb_notes_pro;
-    //     this.avg_note_pro = avg_note_pro;
-    //     this.releaseDate = releaseDate;
-    //     this.url = url;
-    //     this.deja_vu = deja_vu;
-    // }
-
-
-    // getTitle(): string {
-    //     return this.title;
-    // }
-
-    // static fromDTO(movie: MovieInterface) {
-    //     return Object.assign(new Movie("null", "null", "null", "null", "null", "null", "null", "null", 0, 0, 0, 0, new Date(), "null", false), movie);
-    // }
 }
 
