@@ -1,0 +1,35 @@
+<div class="app-movie" [class.active]="movie.Film_Vue == true">
+    <div id="header">
+        <button class="btn" id="deja_vu" (click)="deja_vu()">✅<div class="tooltiptext">Ajouté à ma liste de films déjà vu</div></button>
+        <button class="btn" id="to_not_see" (click)="to_not_see()" (to_not_see)="to_not_see">❌<div class="tooltiptext">Ajouté à ma liste de films que je ne regarderais jamais</div></button>
+    </div>
+    <div id="card">
+        <img src="http://localhost:5000/poster?id={{ movie.Film_IdAllocine }}" alt="{{ movie.Film_Titre }}" id="front">
+        <div id="back">
+            <!-- <div><b>De</b> {{ movie.director }}</div>
+            <div><b>Par</b> {{ movie.producer }}</div>
+            <div><b>Genre</b> {{ movie.category }}</div>
+            <div><b>Avec</b> {{ movie.actor }}</div>
+            <div><b>Synopsis</b> : {{ movie.synopsis }}</div>
+            <div><b>Public</b> : {{ movie.ageMinimum }}</div> -->
+        </div>
+    </div>
+    <div id="info">
+        <!-- <h1><a routerLink="{{ movie.Film_Id }}">{{ movie.Film_Titre }}</a></h1> -->
+        <h1>{{ movie.Film_Titre }}</h1>
+        <div>Date de sortie : {{ movie.Film_DateDeSortie | date: 'd MMMM yyyy, à HH:mm' }}</div>
+    </div>
+    <div id="notes">
+        <div id="public">
+            <div class="nb">{{ movie.Film_NbNoteSpectateur }} notes public</div>
+            <div class="avg">{{ movie.Film_NoteSpectateur }} / 5</div>
+        </div>
+        @if (movie.Film_NbAvisPresse > 0) {
+            <div id="pro">
+                <div class="nb">{{ movie.Film_NbAvisPresse }} notes pro</div>
+                <div class="avg">{{ movie.Film_NotePresse }} / 5</div>
+            </div>
+        }
+    </div>
+</div>
+

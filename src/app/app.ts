@@ -1,10 +1,13 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { FirstPage } from './first-page/first-page';
-// import { RouterOutlet } from '@angular/router';
+import { FirstPage } from './pages/first-page/first-page';
+import { RouterOutlet } from '@angular/router';
+import { Header } from './components/header/header';
+import { Footer } from './components/footer/footer';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [FirstPage],
+  imports: [Header, RouterOutlet, Footer, FormsModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

@@ -67,3 +67,11 @@
     height: 420px;
 }
 
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.active {
+    opacity: 20%;
+}

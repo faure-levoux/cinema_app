@@ -1,0 +1,18 @@
+Liste films Déjà vu
+liste liste qu'on nne veut pas voir
+<app-search-bar (searchButtonClicked)="increment()" [(search)]="searchText"></app-search-bar>
+
+    <div>Clicked count {{ count }}</div>
+    <div>Search Text {{ searchText }}</div>
+
+<div id="app-first-page">
+
+    @for (movie of movies$ | async; track movie.Film_Id) {
+        @if (movie.Film_ANePasVoir == false) {
+            <app-movie [movie]="movie"/>
+        }
+    } @empty {
+        <div>No results found</div> 
+    }
+</div>
+
