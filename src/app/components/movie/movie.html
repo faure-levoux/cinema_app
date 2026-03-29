@@ -15,21 +15,18 @@
         </div>
     </div>
     <div id="info">
-        <!-- <h1><a routerLink="{{ movie.Film_Id }}">{{ movie.Film_Titre }}</a></h1> -->
-        <h1>{{ movie.Film_Titre }}</h1>
-        <div>Date de sortie : {{ movie.Film_DateDeSortie | date: 'd MMMM yyyy, à HH:mm' }}</div>
+        <h1 id="titleMovie"><a routerLink="film/{{ movie.Film_Id }}">{{ movie.Film_Titre }}</a></h1>
     </div>
     <div id="notes">
+        <div>Date de sortie : {{ movie.Film_DateDeSortie | date: 'd MMMM yyyy, à HH:mm' }}</div>
         <div id="public">
             <div class="nb">{{ movie.Film_NbNoteSpectateur }} notes public</div>
-            <div class="avg">{{ movie.Film_NoteSpectateur }} / 5</div>
+            <div class="avg">Note : {{ movie.Film_NoteSpectateur }} / 5 de moyenne</div>
         </div>
-        @if (movie.Film_NbAvisPresse > 0) {
-            <div id="pro">
-                <div class="nb">{{ movie.Film_NbAvisPresse }} notes pro</div>
-                <div class="avg">{{ movie.Film_NotePresse }} / 5</div>
-            </div>
-        }
+        <div id="pro">
+            <div class="nb">{{ movie.Film_NbAvisPresse > 0 ? movie.Film_NbAvisPresse + " critiques " : "Aucune critique" }}  presse</div>
+            <div class="avg">{{ movie.Film_NotePresse  > 0 ? "Note : " + movie.Film_NotePresse + " / 5 de moyenne" : " "  }}</div>
+        </div>
     </div>
 </div>
 

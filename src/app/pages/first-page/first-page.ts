@@ -1,14 +1,11 @@
-import { Component, inject, OnInit, output, OutputEmitterRef, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Movie } from '../../models/movie';
-import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MovieComponent } from '../../components/movie/movie';
-import { AsyncPipe, JsonPipe, NgFor } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { SearchBar } from '../../components/search-bar/search-bar';
-import { FormsModule, NgForm } from '@angular/forms';
-import { interval, map, Observable } from 'rxjs';
-import { transform } from 'typescript';
-import { MovieListInterface } from '../../interfaces/movie_list';
+import { FormsModule } from '@angular/forms';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-first-page',
@@ -16,28 +13,62 @@ import { MovieListInterface } from '../../interfaces/movie_list';
   templateUrl: './first-page.html',
   styleUrl: './first-page.css',
 })
+
 export class FirstPage implements OnInit {
-  count: number = 0;
   searchText = "";
-  constructor(private http: HttpClient) {
-  }
+  activated = false;
+  noteMinimum = 0;
+  sort = "notePub";
+  constructor(private http: HttpClient) {}
 
 
-  increment() {
-    this.count++;
+  sortingMoviesFromChoice(choice: string) {
+    if (choice == "sortByNotePub") {
+      this.movies$ = this.movies$.pipe(
+        map(movies => movies.sort((a, b) => b.Film_NoteSpectateur - a.Film_NoteSpectateur))
+      )
+    }
+    else if (choice == "sortByNotePre") {
+      this.movies$ = this.movies$.pipe(
+        map(movies => movies.sort((a, b) => b.Film_NotePresse - a.Film_NotePresse))
+      )
+    }
+    else if (choice == "sortByNbNotePre") {
+      this.movies$ = this.movies$.pipe(
+        map(movies => movies.sort((a, b) => b.Film_NbAvisPresse - a.Film_NbAvisPresse))
+      )
+    }
+    else if (choice == "sortByNbNotePub") {
+      this.movies$ = this.movies$.pipe(
+        map(movies => movies.sort((a, b) => b.Film_NbNoteSpectateur - a.Film_NbNoteSpectateur))
+      )
+      
+    }
   }
+
+  noteSelected(nb: string): void {
+    this.noteMinimum = parseFloat(nb);
+  }
+
+  activation(): void {
+    if (this.activated == true) {
+      this.activated = false;
+    } else {
+      this.activated = true;
+    }
+  }
+
   movies$!: Observable<Movie[]>;
 
   ngOnInit(): void {
-    this.movies$ = this.http.get<string>('http://localhost:5000/list_movies_from_to?from=2000&to=2250').pipe(
+    this.movies$ = this.http.get<string>('http://localhost:5000/list_movies_from_to?from=0&to=250').pipe(
       map(v => {
         const movies: Movie[] = [];
         for(let i = 0; i < v.length; i++) {
-          console.log(v[i]);
-          let movie = new Movie([parseInt(v[i][0]), parseInt(v[i][1]), JSON.parse(v[i][2]), JSON.parse(v[i][3]), JSON.parse(v[i][4]), parseFloat(v[i][5]), parseInt(v[i][6]), parseFloat(v[i][7]), parseInt(v[i][8]), parseInt(v[i][9]), v[i][10], parseInt(v[i][11]), new Date(v[i][12]), JSON.parse(v[i][13]), v[i][14]]);
+          let movie = new Movie([parseInt(v[i][0]), parseInt(v[i][1]), JSON.parse(v[i][2]), JSON.parse(v[i][3]), JSON.parse(v[i][4]), v[i][5] == undefined ? 0 : parseFloat(v[i][5]), v[i][6] == undefined ? 0 : parseFloat(v[i][6]), parseFloat(v[i][7]), parseInt(v[i][8]), parseInt(v[i][9]), v[i][10], parseInt(v[i][11]), new Date(v[i][12]), JSON.parse(v[i][13]), v[i][14]]);
           movies.push(movie);
-          console.log(movie);
         }
+        movies.sort((a, b) => b.Film_NoteSpectateur - a.Film_NoteSpectateur)
         return movies;
       }));
   }

@@ -1,18 +1,40 @@
-Liste films Déjà vu
-liste liste qu'on nne veut pas voir
-<app-search-bar (searchButtonClicked)="increment()" [(search)]="searchText"></app-search-bar>
+<app-search-bar [(search)]="searchText"></app-search-bar>
 
-    <div>Clicked count {{ count }}</div>
     <div>Search Text {{ searchText }}</div>
+
+    <button>Note publique > 4/5</button>
+    <button>Tri par note publique</button>
+    <label for="sort">Tri par</label>
+    <select name="sort" id="sort" #sort (change)="sortingMoviesFromChoice(sort.value)">
+        <option value="sortByNotePub" selected>Note Publique</option>
+        <option value="sortByNotePre">Note Presse</option>
+        <option value="sortByNbNotePre">Nombre de critiques de presse</option>
+        <option value="sortByNbNotePub">Nombre de note du public</option>
+    </select>
+    <label for="notePub">Note publique minimum : </label>
+    <select name="notePub" id="notePub" #notePub (change)="noteSelected(notePub.value)">
+        <option value="0">0</option>
+        <option value="0.5">0.5</option>
+        <option value="1">1</option>
+        <option value="1.5">1.5</option>
+        <option value="2">2</option>
+        <option value="2.5">2.5</option>
+        <option value="3">3</option>
+        <option value="3.5">3.5</option>
+        <option value="4">4</option>
+        <option value="4.5">4.5</option>
+        <option value="5">5</option>
+    </select>
 
 <div id="app-first-page">
 
     @for (movie of movies$ | async; track movie.Film_Id) {
-        @if (movie.Film_ANePasVoir == false) {
+        @if (movie.Film_ANePasVoir == false && movie.Film_Titre.includes(searchText) && movie.Film_NoteSpectateur > noteMinimum) {
             <app-movie [movie]="movie"/>
         }
     } @empty {
-        <div>No results found</div> 
+        <div>Chargement ...</div> 
+        <img src="/waiting-ugh.gif" alt="">
     }
 </div>
 
