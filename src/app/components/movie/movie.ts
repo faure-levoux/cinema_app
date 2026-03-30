@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-movie',
-  imports: [DatePipe, RouterLink],
+  imports: [DatePipe],
   templateUrl: './movie.html',
   styleUrl: './movie.css',
 })

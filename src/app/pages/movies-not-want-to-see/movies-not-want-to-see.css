@@ -1,3 +1,4 @@
 #app-movies-not-want-to-see {
     display: flex;
+    flex-wrap: wrap;
 }

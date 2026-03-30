@@ -5,7 +5,7 @@
                     ✅
                     <div class="tooltiptext">Ajouter à ma liste de films déjà vu</div>
                 </button>
-                <button class="btn" id="to_not_see" (click)="to_not_see()" (to_not_see)="to_not_see">❌<div class="tooltiptext">Ajouté à ma liste de films que je ne regarderais jamais</div></button>
+                <button class="btn" id="to_not_see" (click)="to_not_see()" (to_not_see)="to_not_see()">❌<div class="tooltiptext">Ajouté à ma liste de films que je ne regarderais jamais</div></button>
             } @else if (movie.Film_ANePasVoir == false && movie.Film_Vue == true && (page == 'app-movies-seen' || page == 'app-first-page')) {
                 <button class="btn" id="deja_vu" (click)="deja_vu()">
                     ❎
@@ -30,7 +30,8 @@
         </div>
     </div>
     <div id="info">
-        <h1 id="titleMovie"><a routerLink="film/{{ movie.Film_IdAllocine }}">{{ movie.Film_Titre }}</a></h1>
+        <!-- <a routerLink="film/{{ movie.Film_IdAllocine }}"></a> -->
+        <h1 id="titleMovie">{{ movie.Film_Titre }}</h1>
     </div>
     <div id="notes">
         <div>Date de sortie : {{ movie.Film_DateDeSortie | date: 'd MMMM yyyy' }}</div>

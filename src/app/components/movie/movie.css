@@ -59,7 +59,7 @@
 }
 
 
-.app-movie #card {
+#card {
     transform-style: preserve-3d;
     transition: transform 0.6s;
     width: 310px;
@@ -67,10 +67,10 @@
 }
 
 
-.app-movie:hover #card {
+/* #card:hover {
     transform: rotateY(180deg);
     position: relative;
-}
+} */
 
 
 #front, #back {

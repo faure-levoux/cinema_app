@@ -11,7 +11,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-first-page',
-  imports: [MovieComponent, AsyncPipe, SearchBar, FormsModule, ScrollingModule, RouterLink],
+  imports: [MovieComponent, AsyncPipe, FormsModule, ScrollingModule],
   templateUrl: './first-page.html',
   styleUrl: './first-page.css',
 })
@@ -73,7 +73,7 @@ export class FirstPage {
   search(txt: string): void {
     this.searchText.update(() => txt);
     if (txt != "") {
-      this.request('http://localhost:5000/search_movie_from_title?title=' + this.searchText() + '&from=' + this.minId() + '&to=' + (this.minId() + this.spread));
+      this.request('http://localhost:5000/search_movie_from_title?title=' + this.searchText() + '&from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum);
     } else {
       this.request('http://localhost:5000/' + this.sort + '?from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum );
     }

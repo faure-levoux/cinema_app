@@ -35,7 +35,7 @@
 
 
     @for (movie of movies$ | async; track movie.Film_Id) {
-        @if (movie.Film_ANePasVoir == false && movie.Film_NoteSpectateur > noteMinimum) {
+        @if (movie.Film_ANePasVoir == false && movie.Film_Vue == false) {
             <app-movie [movie]="movie" [page]="page"/>
         }
     } @empty {
