@@ -27,7 +27,7 @@ export class MovieComponent {
       this.http.get<string>("http://localhost:5000/update_delete_movie?id=" + this.movie.Film_IdAllocine).subscribe();
     }
   }
-
+  
   deja_vu(): void {
     if (this.movie.Film_Vue == true) {
       this.movie.Film_Vue = false;

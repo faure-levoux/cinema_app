@@ -33,7 +33,7 @@
         <h1 id="titleMovie"><a routerLink="film/{{ movie.Film_IdAllocine }}">{{ movie.Film_Titre }}</a></h1>
     </div>
     <div id="notes">
-        <div>Date de sortie : {{ movie.Film_DateDeSortie | date: 'd MMMM yyyy, à HH:mm' }}</div>
+        <div>Date de sortie : {{ movie.Film_DateDeSortie | date: 'd MMMM yyyy' }}</div>
         <div id="public">
             <div class="nb">{{ movie.Film_NbNoteSpectateur }} notes public</div>
             <div class="avg">Note : {{ movie.Film_NoteSpectateur }} / 5 de moyenne</div>

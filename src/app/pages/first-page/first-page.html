@@ -1,16 +1,17 @@
-<app-search-bar [(search)]="searchText"></app-search-bar>
+<!-- <app-search-bar [(search)]="searchText"></app-search-bar> -->
+<input type="text" id="live-search" #txtsearch (input)="search(txtsearch.value)">
 
-    <div>Film recherché {{ searchText }}</div>
+    <div>Film recherché {{ searchText() }}</div>
 
     <label for="sort">Tri par</label>
     <select name="sort" id="sort" #sort (change)="sortingMoviesFromChoice(sort.value)">
-        <option value="sortByNotePub" selected>Note Publique</option>
-        <option value="sortByNotePre">Note Presse</option>
-        <option value="sortByNbNotePre">Nombre de critiques de presse</option>
-        <option value="sortByNbNotePub">Nombre de note du public</option>
+        <option value="list_IdAllocine_available_NoteSpectateur_desc" selected>Note Publique</option>
+        <option value="list_IdAllocine_available_NotePresse_desc">Note Presse</option>
+        <option value="list_IdAllocine_available_NbAvisPresse_desc">Nombre de critiques de presse</option>
+        <option value="list_IdAllocine_available_NbNoteSpectateur_desc">Nombre de note du public</option>
     </select>
     <label for="notePub">Note publique minimum : </label>
-    <select name="notePub" id="notePub" #notePub (change)="noteSelected(notePub.value)">
+    <select name="notePub" id="notePub" #notePub (change)="noteSelected(notePub.value)" (intervalSearchChange)="noteSelected(notePub.value)">
         <option value="0">0</option>
         <option value="0.5">0.5</option>
         <option value="1">1</option>
@@ -23,11 +24,18 @@
         <option value="4.5">4.5</option>
         <option value="5">5</option>
     </select>
+    <div>
+        <div>Année de sortie</div>
+    </div>
+
+    <button (click)="lastPage()"><</button>
+    <button (click)="nextPage()">></button>
 
 <div id="app-first-page">
 
+
     @for (movie of movies$ | async; track movie.Film_Id) {
-        @if (movie.Film_ANePasVoir == false && movie.Film_Titre.includes(searchText) && movie.Film_NoteSpectateur > noteMinimum) {
+        @if (movie.Film_ANePasVoir == false && movie.Film_NoteSpectateur > noteMinimum) {
             <app-movie [movie]="movie" [page]="page"/>
         }
     } @empty {

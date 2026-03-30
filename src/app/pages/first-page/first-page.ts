@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, effect, HostListener, OnInit, output, OutputEmitterRef, signal } from '@angular/core';
 import { Movie } from '../../models/movie';
 import { HttpClient } from '@angular/common/http';
 import { MovieComponent } from '../../components/movie/movie';
@@ -6,49 +6,77 @@ import { AsyncPipe } from '@angular/common';
 import { SearchBar } from '../../components/search-bar/search-bar';
 import { FormsModule } from '@angular/forms';
 import { map, Observable } from 'rxjs';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-first-page',
-  imports: [MovieComponent, AsyncPipe, SearchBar, FormsModule],
+  imports: [MovieComponent, AsyncPipe, SearchBar, FormsModule, ScrollingModule, RouterLink],
   templateUrl: './first-page.html',
   styleUrl: './first-page.css',
 })
 
-export class FirstPage implements OnInit {
-  searchText = "";
+export class FirstPage {
+  searchText = signal("");
   activated = false;
   noteMinimum = 0;
-  sort = "notePub";
+  sort = "list_IdAllocine_available_NoteSpectateur_desc";
   page = "app-first-page";
-  constructor(private http: HttpClient) {}
+  spread = 60;
+  minId = signal(0);
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
+  nextPage(): void  {
+    this.minId.update((currentValue) => currentValue + this.spread);
+  }
+  
+  lastPage(): void  {
+    this.minId.update((currentValue) => {
+      const result = currentValue - this.spread;
+      if (result < 0 ) {
+        return 0
+      } else {
+        return result;
+      }
+    });
+  }
+
+  blablabla = effect(() => {
+    this.request('http://localhost:5000/' + this.sort + '?from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum );
+  })
+
+  request(url: string): void {
+    this.movies$ = this.http.get<string>(url).pipe(
+    map(v => {
+      const movies: Movie[] = [];
+      for(let i = 0; i < v.length; i++) {
+        let movie = new Movie([parseInt(v[i][0]), parseInt(v[i][1]), JSON.parse(v[i][2]), JSON.parse(v[i][3]), JSON.parse(v[i][4]), v[i][5] == undefined ? 0 : parseFloat(v[i][5]), v[i][6] == undefined ? 0 : parseFloat(v[i][6]), parseFloat(v[i][7]), parseInt(v[i][8]), parseInt(v[i][9]), v[i][10], parseInt(v[i][11]), new Date(v[i][12]), JSON.parse(v[i][13]), v[i][14], JSON.parse(v[i][15]) == undefined ? false : JSON.parse(v[i][15])]);
+        movies.push(movie);
+      }
+      return movies;
+    }));
+    
+  }
 
   sortingMoviesFromChoice(choice: string) {
-    if (choice == "sortByNotePub") {
-      this.movies$ = this.movies$.pipe(
-        map(movies => movies.sort((a, b) => b.Film_NoteSpectateur - a.Film_NoteSpectateur))
-      )
-    }
-    else if (choice == "sortByNotePre") {
-      this.movies$ = this.movies$.pipe(
-        map(movies => movies.sort((a, b) => b.Film_NotePresse - a.Film_NotePresse))
-      )
-    }
-    else if (choice == "sortByNbNotePre") {
-      this.movies$ = this.movies$.pipe(
-        map(movies => movies.sort((a, b) => b.Film_NbAvisPresse - a.Film_NbAvisPresse))
-      )
-    }
-    else if (choice == "sortByNbNotePub") {
-      this.movies$ = this.movies$.pipe(
-        map(movies => movies.sort((a, b) => b.Film_NbNoteSpectateur - a.Film_NbNoteSpectateur))
-      )
-      
-    }
+    this.sort = choice;
+    this.minId.update(() => 0);
+    this.request('http://localhost:5000/' + this.sort + '?from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum );
   }
 
   noteSelected(nb: string): void {
     this.noteMinimum = parseFloat(nb);
+    this.minId.update(() => 0);
+    this.request('http://localhost:5000/' + this.sort + '?from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum );
+  }
+  
+  search(txt: string): void {
+    this.searchText.update(() => txt);
+    if (txt != "") {
+      this.request('http://localhost:5000/search_movie_from_title?title=' + this.searchText() + '&from=' + this.minId() + '&to=' + (this.minId() + this.spread));
+    } else {
+      this.request('http://localhost:5000/' + this.sort + '?from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum );
+    }
   }
 
   activation(): void {
@@ -58,23 +86,29 @@ export class FirstPage implements OnInit {
       this.activated = true;
     }
   }
+  
+  // @HostListener('document:scroll', ['$event'])
+  // getPosition(): void {
+  //   const afp: any = document.getElementById("app-first-page")?.getBoundingClientRect().y;
+  //   if (afp < -800) {
+  //     console.log("hey")
+  //   } 
+  // }
 
   movies$!: Observable<Movie[]>;
+  moviii$!: Observable<string[]>;
 
-  ngOnInit(): void {
-    this.movies$ = this.http.get<string>('http://localhost:5000/list_movies_from_to?from=5000&to=10250').pipe(
-      map(v => {
-        const movies: Movie[] = [];
-        for(let i = 0; i < v.length; i++) {
-          console.log(v[i][13]);
-          console.log(v[i][15]);
-          console.log(JSON.parse(v[i][15]));
-          let movie = new Movie([parseInt(v[i][0]), parseInt(v[i][1]), JSON.parse(v[i][2]), JSON.parse(v[i][3]), JSON.parse(v[i][4]), v[i][5] == undefined ? 0 : parseFloat(v[i][5]), v[i][6] == undefined ? 0 : parseFloat(v[i][6]), parseFloat(v[i][7]), parseInt(v[i][8]), parseInt(v[i][9]), v[i][10], parseInt(v[i][11]), new Date(v[i][12]), JSON.parse(v[i][13]), v[i][14], JSON.parse(v[i][15]) == undefined ? false : JSON.parse(v[i][15])]);
-          console.log(movie)
-          movies.push(movie);
-        }
-        movies.sort((a, b) => b.Film_NoteSpectateur - a.Film_NoteSpectateur)
-        return movies;
-      }));
-  }
+  // ngOnInit(): void {
+
+  //   this.movies$ = this.http.get<string>('http://localhost:5000/list_movies_from_to?from=' + this.minId() + '&to=' + this.maxId()).pipe(
+  //     map(v => {
+  //       const movies: Movie[] = [];
+  //       for(let i = 0; i < v.length; i++) {
+  //         let movie = new Movie([parseInt(v[i][0]), parseInt(v[i][1]), JSON.parse(v[i][2]), JSON.parse(v[i][3]), JSON.parse(v[i][4]), v[i][5] == undefined ? 0 : parseFloat(v[i][5]), v[i][6] == undefined ? 0 : parseFloat(v[i][6]), parseFloat(v[i][7]), parseInt(v[i][8]), parseInt(v[i][9]), v[i][10], parseInt(v[i][11]), new Date(v[i][12]), JSON.parse(v[i][13]), v[i][14], JSON.parse(v[i][15]) == undefined ? false : JSON.parse(v[i][15])]);
+  //         movies.push(movie);
+  //       }
+  //       // movies.sort((a, b) => b.Film_NoteSpectateur - a.Film_NoteSpectateur)
+  //       return movies;
+  //     }));
+  // }
 }
