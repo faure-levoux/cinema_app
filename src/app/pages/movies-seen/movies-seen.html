@@ -1,7 +1,8 @@
-@for (movie of movies$ | async; track movie.Film_Id) {
-    <app-movie [movie]="movie"/>
-} 
 
 <div id="app-movies-seen">
-
+    @for (movie of movies$ | async; track movie.Film_Id) {
+        @if (movie.Film_Vue == true) {
+            <app-movie [movie]="movie" [page]="page"/>
+        }
+    } 
 </div>

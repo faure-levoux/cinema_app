@@ -1,7 +1,22 @@
-<div class="app-movie" [class.active]="movie.Film_Vue == true">
+<div class="app-movie" [class.Film_Vue]="movie.Film_Vue == true && page == 'app-first-page'">
     <div id="header">
-        <button class="btn" id="deja_vu" (click)="deja_vu()">✅<div class="tooltiptext">Ajouté à ma liste de films déjà vu</div></button>
-        <button class="btn" id="to_not_see" (click)="to_not_see()" (to_not_see)="to_not_see">❌<div class="tooltiptext">Ajouté à ma liste de films que je ne regarderais jamais</div></button>
+        @if (movie.Film_ANePasVoir == false && movie.Film_Vue == false && page == 'app-first-page') {
+                <button class="btn" id="deja_vu" (click)="deja_vu()">
+                    ✅
+                    <div class="tooltiptext">Ajouter à ma liste de films déjà vu</div>
+                </button>
+                <button class="btn" id="to_not_see" (click)="to_not_see()" (to_not_see)="to_not_see">❌<div class="tooltiptext">Ajouté à ma liste de films que je ne regarderais jamais</div></button>
+            } @else if (movie.Film_ANePasVoir == false && movie.Film_Vue == true && (page == 'app-movies-seen' || page == 'app-first-page')) {
+                <button class="btn" id="deja_vu" (click)="deja_vu()">
+                    ❎
+                    <div class="tooltiptext">Retirer de la liste déjà vu</div>
+                </button>
+            } @else if (movie.Film_ANePasVoir == true){
+                <button class="btn" id="deja_vu" (click)="to_not_see()">
+                    ❎
+                    <div class="tooltiptext">Retirer de la liste à ne pas voir</div>
+                </button>
+            }
     </div>
     <div id="card">
         <img src="http://localhost:5000/poster?id={{ movie.Film_IdAllocine }}" alt="{{ movie.Film_Titre }}" id="front">
@@ -24,7 +39,7 @@
             <div class="avg">Note : {{ movie.Film_NoteSpectateur }} / 5 de moyenne</div>
         </div>
         <div id="pro">
-            <div class="nb">{{ movie.Film_NbAvisPresse > 0 ? movie.Film_NbAvisPresse + " critiques " : "Aucune critique" }}  presse</div>
+            <div class="nb">{{ movie.Film_NbAvisPresse }} {{ movie.Film_NbAvisPresse > 1 ? " critiques " : " critique " }}  presse</div>
             <div class="avg">{{ movie.Film_NotePresse  > 0 ? "Note : " + movie.Film_NotePresse + " / 5 de moyenne" : " "  }}</div>
         </div>
     </div>

@@ -90,8 +90,12 @@ a {
     text-decoration: none;
 }
 
-.active {
+.Film_Vue {
     opacity: 20%;
+}
+
+.deleteIconeNone {
+    display: none;
 }
 
 #titleMovie {

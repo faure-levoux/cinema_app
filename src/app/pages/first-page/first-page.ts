@@ -19,6 +19,7 @@ export class FirstPage implements OnInit {
   activated = false;
   noteMinimum = 0;
   sort = "notePub";
+  page = "app-first-page";
   constructor(private http: HttpClient) {}
 
 
@@ -61,11 +62,15 @@ export class FirstPage implements OnInit {
   movies$!: Observable<Movie[]>;
 
   ngOnInit(): void {
-    this.movies$ = this.http.get<string>('http://localhost:5000/list_movies_from_to?from=10000&to=10250').pipe(
+    this.movies$ = this.http.get<string>('http://localhost:5000/list_movies_from_to?from=5000&to=10250').pipe(
       map(v => {
         const movies: Movie[] = [];
         for(let i = 0; i < v.length; i++) {
-          let movie = new Movie([parseInt(v[i][0]), parseInt(v[i][1]), JSON.parse(v[i][2]), JSON.parse(v[i][3]), JSON.parse(v[i][4]), v[i][5] == undefined ? 0 : parseFloat(v[i][5]), v[i][6] == undefined ? 0 : parseFloat(v[i][6]), parseFloat(v[i][7]), parseInt(v[i][8]), parseInt(v[i][9]), v[i][10], parseInt(v[i][11]), new Date(v[i][12]), JSON.parse(v[i][13]), v[i][14]]);
+          console.log(v[i][13]);
+          console.log(v[i][15]);
+          console.log(JSON.parse(v[i][15]));
+          let movie = new Movie([parseInt(v[i][0]), parseInt(v[i][1]), JSON.parse(v[i][2]), JSON.parse(v[i][3]), JSON.parse(v[i][4]), v[i][5] == undefined ? 0 : parseFloat(v[i][5]), v[i][6] == undefined ? 0 : parseFloat(v[i][6]), parseFloat(v[i][7]), parseInt(v[i][8]), parseInt(v[i][9]), v[i][10], parseInt(v[i][11]), new Date(v[i][12]), JSON.parse(v[i][13]), v[i][14], JSON.parse(v[i][15]) == undefined ? false : JSON.parse(v[i][15])]);
+          console.log(movie)
           movies.push(movie);
         }
         movies.sort((a, b) => b.Film_NoteSpectateur - a.Film_NoteSpectateur)

@@ -16,7 +16,7 @@ export class Movie {
     Film_Titre: string;
     Film_ANePasVoir: boolean;
 
-    constructor(list: [number, number, boolean, boolean, boolean, number, number, number, number, number, string, number, Date, boolean, string]) {
+    constructor(list: [number, number, boolean, boolean, boolean, number, number, number, number, number, string, number, Date, boolean, string, boolean]) {
         this.Film_Id = list[0];
         this.Film_IdAllocine = list[1];
         this.Film_Indes = list[2];
@@ -32,7 +32,7 @@ export class Movie {
         this.Film_DateDeSortie = list[12];
         this.Film_Vue = list[13];
         this.Film_Titre = list[14];
-        this.Film_ANePasVoir = false;
+        this.Film_ANePasVoir = list[15];
     }
 
 }

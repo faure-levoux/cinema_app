@@ -14,7 +14,9 @@ import { map } from 'rxjs/internal/operators/map';
   styleUrl: './movies-seen.css',
 })
 export class MoviesSeen {
-  // @Input() movie!: Movie;
+  @Input() movie!: Movie;
+  page = "app-movies-seen";
+
   constructor(private http: HttpClient) {}
 
 
@@ -25,13 +27,10 @@ ngOnInit(): void {
       map(v => {
         const movies: Movie[] = [];
         for(let i = 0; i < v.length; i++) {
-          console.log(v[i][0])
-          console.log(v[i][0][2])
-          let movie = new Movie([parseInt(v[i][0]), parseInt(v[i][1]), JSON.parse(v[i][2]), JSON.parse(v[i][3]), JSON.parse(v[i][4]), v[i][5] == undefined ? 0 : parseFloat(v[i][5]), v[i][6] == undefined ? 0 : parseFloat(v[i][6]), parseFloat(v[i][7]), parseInt(v[i][8]), parseInt(v[i][9]), v[i][10], parseInt(v[i][11]), new Date(v[i][12]), false, v[i][14]]);
+          let movie = new Movie([parseInt(v[i][0]), parseInt(v[i][1]), JSON.parse(v[i][2]), JSON.parse(v[i][3]), JSON.parse(v[i][4]), v[i][5] == undefined ? 0 : parseFloat(v[i][5]), v[i][6] == undefined ? 0 : parseFloat(v[i][6]), parseFloat(v[i][7]), parseInt(v[i][8]), parseInt(v[i][9]), v[i][10], parseInt(v[i][11]), new Date(v[i][12]), JSON.parse(v[i][13]) == undefined ? false : JSON.parse(v[i][13]), v[i][14], JSON.parse(v[i][15]) == undefined ? false : JSON.parse(v[i][15])]);
           movies.push(movie);
         }
         return movies;
       }));
   }
-  //already_seen_movie
 }
