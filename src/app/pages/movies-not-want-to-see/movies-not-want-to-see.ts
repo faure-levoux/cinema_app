@@ -19,7 +19,7 @@ export class MoviesNotWantToSee {
   movies$!: Observable<Movie[]>;
   
 ngOnInit(): void {
-    this.movies$ = this.http.get<string>('http://localhost:5000/already_dont_want_to_see_movie').pipe(
+    this.movies$ = this.http.get<string>('http://87.106.196.204:5000/already_dont_want_to_see_movie').pipe(
       map(v => {
         const movies: Movie[] = [];
         for(let i = 0; i < v.length; i++) {

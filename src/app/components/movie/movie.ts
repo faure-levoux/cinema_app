@@ -21,20 +21,20 @@ export class MovieComponent {
   to_not_see(): void {
     if (this.movie.Film_ANePasVoir == true) {
       this.movie.Film_ANePasVoir = false;
-      this.http.get<string>("http://localhost:5000/update_delete_movie_not?id=" + this.movie.Film_IdAllocine).subscribe();
+      this.http.get<string>("http://87.106.196.204:5000/update_delete_movie_not?id=" + this.movie.Film_IdAllocine).subscribe();
     } else {
       this.movie.Film_ANePasVoir = true;
-      this.http.get<string>("http://localhost:5000/update_delete_movie?id=" + this.movie.Film_IdAllocine).subscribe();
+      this.http.get<string>("http://87.106.196.204:5000/update_delete_movie?id=" + this.movie.Film_IdAllocine).subscribe();
     }
   }
   
   deja_vu(): void {
     if (this.movie.Film_Vue == true) {
       this.movie.Film_Vue = false;
-      this.http.get<string>("http://localhost:5000/update_seen_movie_not?id=" + this.movie.Film_IdAllocine).subscribe();
+      this.http.get<string>("http://87.106.196.204:5000/update_seen_movie_not?id=" + this.movie.Film_IdAllocine).subscribe();
     } else {
       this.movie.Film_Vue = true;
-      this.http.get<string>("http://localhost:5000/update_seen_movie?id=" + this.movie.Film_IdAllocine).subscribe();
+      this.http.get<string>("http://87.106.196.204:5000/update_seen_movie?id=" + this.movie.Film_IdAllocine).subscribe();
     }
   }
 

@@ -41,8 +41,8 @@ export class FirstPage {
     });
   }
 
-  blablabla = effect(() => {
-    this.request('http://localhost:5000/' + this.sort + '?from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum );
+  updateMovies = effect(() => {
+    this.request('http://87.106.196.204:5000/' + this.sort + '?from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum );
   })
 
   request(url: string): void {
@@ -61,21 +61,21 @@ export class FirstPage {
   sortingMoviesFromChoice(choice: string) {
     this.sort = choice;
     this.minId.update(() => 0);
-    this.request('http://localhost:5000/' + this.sort + '?from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum );
+    this.request('http://87.106.196.204:5000/' + this.sort + '?from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum );
   }
 
   noteSelected(nb: string): void {
     this.noteMinimum = parseFloat(nb);
     this.minId.update(() => 0);
-    this.request('http://localhost:5000/' + this.sort + '?from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum );
+    this.request('http://87.106.196.204:5000/' + this.sort + '?from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum );
   }
   
   search(txt: string): void {
     this.searchText.update(() => txt);
     if (txt != "") {
-      this.request('http://localhost:5000/search_movie_from_title?title=' + this.searchText() + '&from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum);
+      this.request('http://87.106.196.204:5000/search_movie_from_title?title=' + this.searchText() + '&from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum);
     } else {
-      this.request('http://localhost:5000/' + this.sort + '?from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum );
+      this.request('http://87.106.196.204:5000/' + this.sort + '?from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum );
     }
   }
 
@@ -100,7 +100,7 @@ export class FirstPage {
 
   // ngOnInit(): void {
 
-  //   this.movies$ = this.http.get<string>('http://localhost:5000/list_movies_from_to?from=' + this.minId() + '&to=' + this.maxId()).pipe(
+  //   this.movies$ = this.http.get<string>('http://87.106.196.204:5000/list_movies_from_to?from=' + this.minId() + '&to=' + this.maxId()).pipe(
   //     map(v => {
   //       const movies: Movie[] = [];
   //       for(let i = 0; i < v.length; i++) {

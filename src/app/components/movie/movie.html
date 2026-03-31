@@ -19,7 +19,7 @@
             }
     </div>
     <div id="card">
-        <img src="http://localhost:5000/poster?id={{ movie.Film_IdAllocine }}" alt="{{ movie.Film_Titre }}" id="front">
+        <img src="http://87.106.196.204:5000/poster?id={{ movie.Film_IdAllocine }}" alt="{{ movie.Film_Titre }}" id="front">
         <div id="back">
             <!-- <div><b>De</b> {{ movie.director }}</div>
             <div><b>Par</b> {{ movie.producer }}</div>
@@ -37,11 +37,11 @@
         <div>Date de sortie : {{ movie.Film_DateDeSortie | date: 'd MMMM yyyy' }}</div>
         <div id="public">
             <div class="nb">{{ movie.Film_NbNoteSpectateur }} notes public</div>
-            <div class="avg">Note : {{ movie.Film_NoteSpectateur }} / 5 de moyenne</div>
+            <div class="avg">Note publique : {{ movie.Film_NoteSpectateur }} / 5 de moyenne</div>
         </div>
         <div id="pro">
             <div class="nb">{{ movie.Film_NbAvisPresse }} {{ movie.Film_NbAvisPresse > 1 ? " critiques " : " critique " }}  presse</div>
-            <div class="avg">{{ movie.Film_NotePresse  > 0 ? "Note : " + movie.Film_NotePresse + " / 5 de moyenne" : " "  }}</div>
+            <div class="avg">{{ movie.Film_NotePresse  > 0 ? "Note presse : " + movie.Film_NotePresse + " / 5 de moyenne" : " "  }}</div>
         </div>
     </div>
 </div>

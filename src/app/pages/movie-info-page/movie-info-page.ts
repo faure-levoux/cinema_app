@@ -22,7 +22,7 @@ export class MovieInfoPage {
   
     ngOnInit(): void {
       console.log("ssdf");
-      this.infosMovie$ = this.http.get<string>('http://localhost:5000/roles_movies?id=121').pipe(
+      this.infosMovie$ = this.http.get<string>('http://87.106.196.204:5000/roles_movies?id=121').pipe(
         map(v => {
           console.log('fds');
           console.log(v);
