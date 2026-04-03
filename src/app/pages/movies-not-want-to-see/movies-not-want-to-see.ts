@@ -5,6 +5,7 @@ import { Movie } from '../../models/movie';
 import { map } from 'rxjs/internal/operators/map';
 import { AsyncPipe } from '@angular/common';
 import { MovieComponent } from '../../components/movie/movie';
+import { URL_API } from '../../global';
 
 @Component({
   selector: 'app-movies-not-want-to-see',
@@ -19,7 +20,7 @@ export class MoviesNotWantToSee {
   movies$!: Observable<Movie[]>;
   
 ngOnInit(): void {
-    this.movies$ = this.http.get<string>('http://87.106.196.204:5000/already_dont_want_to_see_movie').pipe(
+    this.movies$ = this.http.get<string>(URL_API + '/already_dont_want_to_see_movie').pipe(
       map(v => {
         const movies: Movie[] = [];
         for(let i = 0; i < v.length; i++) {

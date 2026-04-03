@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
+import { URL_API } from '../../global';
 
 @Component({
   selector: 'app-movie-info-page',
@@ -13,6 +14,9 @@ import { map } from 'rxjs/internal/operators/map';
 })
 export class MovieInfoPage {
   urlIdMovie: string;
+  
+  src_url_poster = URL_API;
+
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.urlIdMovie = this.route.snapshot.params['url'];
@@ -22,7 +26,7 @@ export class MovieInfoPage {
   
     ngOnInit(): void {
       console.log("ssdf");
-      this.infosMovie$ = this.http.get<string>('http://87.106.196.204:5000/roles_movies?id=121').pipe(
+      this.infosMovie$ = this.http.get<string>(this.src_url_poster + '/roles_movies?id=121').pipe(
         map(v => {
           console.log('fds');
           console.log(v);

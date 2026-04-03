@@ -19,7 +19,7 @@
             }
     </div>
     <div id="card">
-        <img src="http://87.106.196.204:5000/poster?id={{ movie.Film_IdAllocine }}" alt="{{ movie.Film_Titre }}" id="front">
+        <img src="{{ this.src_url_poster }}/poster?id={{ movie.Film_IdAllocine }}" alt="{{ movie.Film_Titre }}" id="front">
         <div id="back">
             <!-- <div><b>De</b> {{ movie.director }}</div>
             <div><b>Par</b> {{ movie.producer }}</div>

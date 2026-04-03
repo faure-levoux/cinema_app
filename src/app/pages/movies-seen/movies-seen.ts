@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { AsyncPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/internal/operators/map';
+import { URL_API } from '../../global';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class MoviesSeen {
   movies$!: Observable<Movie[]>;
   
 ngOnInit(): void {
-    this.movies$ = this.http.get<string>('http://87.106.196.204:5000/already_seen_movie').pipe(
+    this.movies$ = this.http.get<string>(URL_API + '/already_seen_movie').pipe(
       map(v => {
         const movies: Movie[] = [];
         for(let i = 0; i < v.length; i++) {
