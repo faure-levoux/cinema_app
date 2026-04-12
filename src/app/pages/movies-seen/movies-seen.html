@@ -1,6 +1,6 @@
 
 <div id="app-movies-seen">
-    @for (movie of movies$ | async; track movie.Film_Id) {
+    @for (movie of movies | async; track movie.Film_Id) {
         @if (movie.Film_Vue == true) {
             <app-movie [movie]="movie" [page]="page"/>
         }

@@ -3,11 +3,10 @@ import { Movie } from '../../models/movie';
 import { HttpClient } from '@angular/common/http';
 import { MovieComponent } from '../../components/movie/movie';
 import { AsyncPipe } from '@angular/common';
-import { SearchBar } from '../../components/search-bar/search-bar';
 import { FormsModule } from '@angular/forms';
 import { map, Observable } from 'rxjs';
-import { ActivatedRoute, RouterLink } from '@angular/router';
 import { URL_API } from '../../global';
+import { Movies } from '../../models/list_movies';
 
 @Component({
   selector: 'app-first-page',
@@ -17,14 +16,15 @@ import { URL_API } from '../../global';
 })
 
 export class FirstPage {
+  page = "app-first-page";
   searchText = signal("");
-  activated = false;
   noteMinimum = 0;
   sort = "list_IdAllocine_available_NoteSpectateur_desc";
-  page = "app-first-page";
   spread = 60;
   minId = signal(0);
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  movies!: Observable<Movie[]>;
+
+  constructor(private http: HttpClient) {}
 
   nextPage(): void  {
     this.minId.update((currentValue) => currentValue + this.spread);
@@ -41,20 +41,9 @@ export class FirstPage {
     });
   }
 
-  updateMovies = effect(() => {
-    this.request(URL_API + '/' + this.sort + '?from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum );
-  })
-
   request(url: string): void {
-    this.movies$ = this.http.get<string>(url).pipe(
-    map(v => {
-      const movies: Movie[] = [];
-      for(let i = 0; i < v.length; i++) {
-        let movie = new Movie(v[i]);
-        movies.push(movie);
-      }
-      return movies;
-    }));
+    this.movies = this.http.get<string>(url).pipe(
+    map(v => new Movies(v).getMovies()));
   }
 
   sortingMoviesFromChoice(choice: string) {
@@ -78,13 +67,7 @@ export class FirstPage {
     }
   }
 
-  activation(): void {
-    if (this.activated == true) {
-      this.activated = false;
-    } else {
-      this.activated = true;
-    }
+  ngOnInit() {
+    this.request(URL_API + '/' + this.sort + '?from=' + this.minId() + '&to=' + (this.minId() + this.spread) + '&noteMinPub=' + this.noteMinimum );
   }
-
-  movies$!: Observable<Movie[]>;
 }

@@ -1,4 +1,3 @@
-<!-- <app-search-bar [(search)]="searchText"></app-search-bar> -->
 <input type="text" id="live-search" #txtsearch (input)="search(txtsearch.value)">
 
     <div>Film recherché {{ searchText() }}</div>
@@ -34,7 +33,7 @@
 <div id="app-first-page">
 
 
-    @for (movie of movies$ | async; track movie.Film_Id) {
+    @for (movie of movies | async; track movie.Film_Id) {
         @if (movie.Film_ANePasVoir == false && movie.Film_Vue == false) {
             <app-movie [movie]="movie" [page]="page"/>
         }

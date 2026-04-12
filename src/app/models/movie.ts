@@ -15,9 +15,9 @@ export class Movie {
     Film_Vue: boolean;
     Film_Titre: string;
     Film_ANePasVoir: boolean;
-    
+
     constructor(list: string) {
-        this.Film_Id = parseInt(list[0]); //parseInt(v[i][0])
+        this.Film_Id = parseInt(list[0]);
         this.Film_IdAllocine = parseInt(list[1]);
         this.Film_Indes = JSON.parse(list[2]);
         this.Film_Cassiques = JSON.parse(list[3]);
@@ -34,6 +34,5 @@ export class Movie {
         this.Film_Titre = list[14];
         this.Film_ANePasVoir = list[15] == undefined ? false : JSON.parse(list[15]);
     }
-
 }
 
