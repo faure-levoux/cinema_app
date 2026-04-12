@@ -50,7 +50,7 @@ export class FirstPage {
     map(v => {
       const movies: Movie[] = [];
       for(let i = 0; i < v.length; i++) {
-        let movie = new Movie([parseInt(v[i][0]), parseInt(v[i][1]), JSON.parse(v[i][2]), JSON.parse(v[i][3]), JSON.parse(v[i][4]), v[i][5] == undefined ? 0 : parseFloat(v[i][5]), v[i][6] == undefined ? 0 : parseFloat(v[i][6]), parseFloat(v[i][7]), parseInt(v[i][8]), parseInt(v[i][9]), v[i][10], parseInt(v[i][11]), new Date(v[i][12]), JSON.parse(v[i][13]), v[i][14], JSON.parse(v[i][15]) == undefined ? false : JSON.parse(v[i][15])]);
+        let movie = new Movie(v[i]);
         movies.push(movie);
       }
       return movies;
