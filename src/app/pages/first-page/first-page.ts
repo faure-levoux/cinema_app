@@ -6,13 +6,12 @@ import { AsyncPipe } from '@angular/common';
 import { SearchBar } from '../../components/search-bar/search-bar';
 import { FormsModule } from '@angular/forms';
 import { map, Observable } from 'rxjs';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { URL_API } from '../../global';
 
 @Component({
   selector: 'app-first-page',
-  imports: [MovieComponent, AsyncPipe, FormsModule, ScrollingModule],
+  imports: [MovieComponent, AsyncPipe, FormsModule],
   templateUrl: './first-page.html',
   styleUrl: './first-page.css',
 })
