@@ -1,4 +1,4 @@
-import { Component, computed, effect, HostListener, OnInit, output, OutputEmitterRef, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { Movie } from '../../models/movie';
 import { HttpClient } from '@angular/common/http';
 import { MovieComponent } from '../../components/movie/movie';

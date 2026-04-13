@@ -24,7 +24,7 @@ export class MoviesSeen {
 
   movies!: Observable<Movie[]>;
   
-ngOnInit(): void {
+  ngOnInit(): void {
     this.movies = this.http.get<Movie[]>(URL_API + '/already_seen_movie').pipe(
       map(v => new Movies(v).getMovies()));
   }
