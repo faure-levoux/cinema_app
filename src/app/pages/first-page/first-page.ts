@@ -42,8 +42,10 @@ export class FirstPage {
   }
 
   request(url: string): void {
-    this.movies = this.http.get<string>(url).pipe(
-    map(v => new Movies(v).getMovies()));
+    this.movies = this.http.get<Movie[]>(url).pipe(
+    map(v => {
+      return new Movies(v).getMovies()
+    }));
   }
 
   sortingMoviesFromChoice(choice: string) {

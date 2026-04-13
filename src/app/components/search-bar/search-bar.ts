@@ -16,6 +16,4 @@ export class SearchBar {
   searchClicked() {
     this.searchButtonClicked.emit();
   }
-
-
 }

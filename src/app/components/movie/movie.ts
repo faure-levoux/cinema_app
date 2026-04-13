@@ -15,7 +15,6 @@ import { URL_API } from '../../global';
 export class MovieComponent {
   @Input() movie!: Movie;
   @Input() page!: string;
-  count = 0;
   src_url_poster = URL_API;
   constructor(private http: HttpClient) {}
 

@@ -66,6 +66,11 @@
     height: 420px;
 }
 
+img {
+    width: 310px;
+    height: 420px;
+}
+
 
 /* #card:hover {
     transform: rotateY(180deg);
